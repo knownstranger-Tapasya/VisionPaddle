@@ -4,15 +4,15 @@ A modern take on the classic Pong game, controlled using computer vision! Contro
 
 ## Requirements
 
-- Python 3.x
+- Python 3.7+
 - Webcam
-- Blue and green objects for paddle control
+- Blue and green objects for paddle control (e.g., colored paper, toys)
 
 ## Installation
 
 1. Clone the repository:
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/knownstranger-Tapasya/VisionPaddle.git
 cd VisionPaddle
 ```
 
@@ -38,34 +38,23 @@ python vision_pong.py
    - The ball speeds up slightly each time it hits a paddle
    - First player to score 5 points wins!
 
-## Controls
-
-- The game uses your webcam to track blue and green objects
-- Move the objects up and down to control the respective paddles
-- Close the game window or press Alt+F4 to exit
-
-## Troubleshooting
-
-If the paddle movement is not responsive:
-- Ensure you have good lighting
-- Use objects with clear, solid colors (blue for left, green for right)
-- Make sure your webcam is working and properly connected
-
-## License
-
-This project is open source and available under the MIT License.
-
 ## Features
+
 - Real-time computer vision paddle control
 - Smooth paddle movement with motion tracking
 - Dynamic ball physics with increasing speed
 - Score tracking
-- Visual effects (paddle trails, glowing ball)
+- Visual effects and smooth gameplay
 
-## Prerequisites
-- Python 3.7+
-- Webcam
-- Blue and green objects for paddle control (e.g., colored paper, toys)
+## Project Structure
+
+```
+VisionPaddle/
+├── vision_pong.py     # Main game file with Pygame display and game loop
+├── game_logic.py      # Core game logic, physics, and computer vision
+├── requirements.txt   # Python dependencies
+└── README.md         # Project documentation
+```
 
 ## Tips for Best Performance
 
@@ -85,20 +74,24 @@ This project is open source and available under the MIT License.
    - Keep the background clean and free of similar colors
    - Make sure no other applications are using the camera
 
-## Project Structure
-```
-vision-paddle/
-├── vision_pong.py     # Main game file
-├── requirements.txt   # Python dependencies
-├── README.md         # Project documentation
-└── docs/            # Documentation and images
-    └── game_preview.png
-```
+## Troubleshooting
+
+If the paddle movement is not responsive:
+- Ensure you have good lighting
+- Use objects with clear, solid colors (blue for left, green for right)
+- Make sure your webcam is working and properly connected
+- Close other applications that might be using the camera
 
 ## Contributing
+
 Contributions are welcome! Please feel free to submit a Pull Request.
 
+## License
+
+This project is open source and available under the MIT License.
+
 ## Acknowledgments
+
 - OpenCV for computer vision capabilities
 - Pygame for game rendering
 - The Python community for various helpful resources
