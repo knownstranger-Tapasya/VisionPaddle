@@ -74,6 +74,11 @@ VisionPaddle/
    - Keep the background clean and free of similar colors
    - Make sure no other applications are using the camera
 
+## Preview
+
+![image](https://github.com/user-attachments/assets/a0d706f1-d0f9-4d68-8904-660eb5cabbaa)
+
+
 ## Troubleshooting
 
 If the paddle movement is not responsive:
