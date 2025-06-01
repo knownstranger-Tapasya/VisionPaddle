@@ -54,3 +54,53 @@ python vision_pong.py
 ## Project Structure
 
 ```
+VisionPaddle/
+├── vision_pong.py     # Main game file with PyGame display and game loop
+├── game_logic.py      # Core game logic, physics, and computer vision
+├── requirements.txt   # Python dependencies
+└── README.md          # Project documentation
+```
+
+## Tips for Best Performance
+
+1. Lighting:
+   - Ensure good, consistent room lighting
+   - Avoid strong back lighting
+   - Minimize shadows in play area
+
+2. Color Objects:
+   - Use solid colored objects (not patterned)
+   - Blue should be distinctly blue (not purple or turquoise)
+   - Green should be distinctly green (not yellow-green)
+   - Avoid reflective materials
+
+3. Camera Setup:
+   - Position yourself with enough distance from the camera
+   - Keep the background clean and free of similar colors
+   - Make sure no other applications are using the camera
+
+## Preview
+
+![image](https://github.com/user-attachments/assets/a0d706f1-d0f9-4d68-8904-660eb5cabbaa)
+
+## Troubleshooting
+
+If the paddle movement is not responsive:
+- Ensure you have good lighting
+- Use objects with clear, solid colors (blue for left, green for right)
+- Make sure your webcam is working and properly connected
+- Close other applications that might be using the camera
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is open source and available under the MIT License.
+
+## Acknowledgments
+
+- OpenCV for computer vision capabilities
+- PyGame for game rendering
+- The Python community for various helpful resources
