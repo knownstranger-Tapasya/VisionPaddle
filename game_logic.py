@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+import pygame
 
 class GameState:
     def __init__(self):
@@ -14,6 +15,10 @@ class GameState:
         # Ball dimensions
         self.BALL_SIZE = 15
         
+        # Game rules
+        self.WINNING_DIFF = 2  # Win by 2 points difference
+        self.GAME_DURATION = 60  # Game duration in seconds
+        
         # Initialize positions
         self.left_paddle_y = self.HEIGHT // 2
         self.right_paddle_y = self.HEIGHT // 2
@@ -25,9 +30,14 @@ class GameState:
         self.ball_speed_x = 7
         self.ball_speed_y = 7
         
-        # Initialize scores
+        # Initialize scores and game state
         self.left_score = 0
         self.right_score = 0
+        self.game_over = False
+        self.winner = None
+        self.start_time = pygame.time.get_ticks()
+        self.time_left = self.GAME_DURATION
+        self.sudden_death = False
         
         # Initialize camera
         self.cap = cv2.VideoCapture(0)
@@ -53,8 +63,36 @@ class GameState:
             return cy
         return None
 
+    def check_win_condition(self):
+        """Check if either player has won after time runs out"""
+        current_time = pygame.time.get_ticks()
+        self.time_left = max(0, self.GAME_DURATION - (current_time - self.start_time) // 1000)
+
+        # Only check for win conditions if time has run out
+        if self.time_left == 0:
+            if not self.sudden_death:
+                if self.left_score != self.right_score:
+                    self.game_over = True
+                    self.winner = "Blue Player" if self.left_score > self.right_score else "Green Player"
+                    return True
+                else:
+                    # Enter sudden death mode
+                    self.sudden_death = True
+                    return False
+            else:
+                # In sudden death, check for 2-point lead
+                if abs(self.left_score - self.right_score) >= self.WINNING_DIFF:
+                    self.game_over = True
+                    self.winner = "Blue Player" if self.left_score > self.right_score else "Green Player"
+                    return True
+        return False
+
     def update(self):
         """Update game state"""
+        # Don't update if game is over
+        if self.game_over:
+            return None
+            
         # Get camera input
         ret, frame = self.cap.read()
         if ret:
@@ -142,7 +180,11 @@ class GameState:
             'left_paddle_y': self.left_paddle_y,
             'right_paddle_y': self.right_paddle_y,
             'left_score': self.left_score,
-            'right_score': self.right_score
+            'right_score': self.right_score,
+            'game_over': self.game_over,
+            'winner': self.winner,
+            'time_left': self.time_left,
+            'sudden_death': self.sudden_death
         }
     
     def cleanup(self):

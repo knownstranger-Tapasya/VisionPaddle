@@ -13,14 +13,17 @@ game_state = GameState()
 screen = pygame.display.set_mode((game_state.WIDTH, game_state.HEIGHT))
 pygame.display.set_caption("Vision Paddle")
 
+# Font
+font = pygame.font.Font(None, 74)
+winner_font = pygame.font.Font(None, 50)
+timer_font = pygame.font.Font(None, 36)
+
 # Colors
 WHITE = (255, 255, 255)
 BLUE = (0, 120, 255)
 GREEN = (0, 255, 120)
 BLACK = (0, 0, 0)
-
-# Font
-font = pygame.font.Font(None, 74)
+RED = (255, 50, 50)
 
 # Game loop
 running = True
@@ -35,6 +38,9 @@ try:
         
         # Update game state
         game_state.update()
+        
+        # Get current state
+        state = game_state.get_state()
         
         # Draw everything
         screen.fill(BLACK)
@@ -51,7 +57,6 @@ try:
                                        game_state.PADDLE_HEIGHT))
         
         # Draw ball
-        state = game_state.get_state()
         ball_x, ball_y = state['ball_pos']
         pygame.draw.circle(screen, WHITE, (int(ball_x), int(ball_y)), game_state.BALL_SIZE//2)
         
@@ -64,6 +69,34 @@ try:
         right_score = font.render(str(game_state.right_score), True, GREEN)
         screen.blit(left_score, (game_state.WIDTH//4, 20))
         screen.blit(right_score, (3*game_state.WIDTH//4, 20))
+        
+        # Draw timer
+        if not state['sudden_death']:
+            timer_color = RED if state['time_left'] <= 10 else WHITE
+            timer_text = timer_font.render(f"Time: {state['time_left']}s", True, timer_color)
+            screen.blit(timer_text, (game_state.WIDTH//2 - 40, 20))
+        else:
+            sudden_death_text = timer_font.render("SUDDEN DEATH!", True, RED)
+            screen.blit(sudden_death_text, (game_state.WIDTH//2 - 60, 20))
+        
+        # Check for win condition
+        game_state.check_win_condition()
+        
+        # Display winner if game is over
+        if state['game_over'] and state['winner']:
+            winner_text = winner_font.render(f"{state['winner']} Wins!", True, WHITE)
+            winner_rect = winner_text.get_rect(center=(game_state.WIDTH//2, game_state.HEIGHT//2))
+            screen.blit(winner_text, winner_rect)
+            
+            # Display "Press ESC to exit" message
+            exit_text = winner_font.render("Press ESC to exit", True, WHITE)
+            exit_rect = exit_text.get_rect(center=(game_state.WIDTH//2, game_state.HEIGHT//2 + 50))
+            screen.blit(exit_text, exit_rect)
+            
+            # Check for ESC key to exit
+            keys = pygame.key.get_pressed()
+            if keys[pygame.K_ESCAPE]:
+                running = False
         
         # Update display
         pygame.display.flip()
