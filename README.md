@@ -81,7 +81,7 @@ VisionPaddle/
 
 ## Preview
 
-![image](https://github.com/user-attachments/assets/a0d706f1-d0f9-4d68-8904-660eb5cabbaa)
+![image](https://github.com/user-attachments/assets/b2b9ecc3-e4e7-497a-bcf7-bc9591dc0d62)
 
 ## Troubleshooting
 
