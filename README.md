@@ -101,9 +101,3 @@ This project is open source and available under the MIT License.
 - Pygame for game rendering
 - The Python community for various helpful resources
 
-## Version History
-- v1.0.0 (2024-03-XX)
-  - Initial release
-  - Basic game functionality
-  - Color-based paddle control
-  - Score tracking 
